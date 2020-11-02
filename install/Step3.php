@@ -1,19 +1,19 @@
 <?php
 #**************************************************************************
-#  openSIS is a free student information system for public and non-public 
+#  openSIS is a free student information system for public and non-public
 #  schools from Open Solutions for Education, Inc. web: www.os4ed.com
 #
-#  openSIS is  web-based, open source, and comes packed with features that 
-#  include student demographic info, scheduling, grade book, attendance, 
-#  report cards, eligibility, transcripts, parent portal, 
-#  student portal and more.   
+#  openSIS is  web-based, open source, and comes packed with features that
+#  include student demographic info, scheduling, grade book, attendance,
+#  report cards, eligibility, transcripts, parent portal,
+#  student portal and more.
 #
 #  Visit the openSIS web site at http://www.opensis.com to learn more.
-#  If you have question regarding this system or the license, please send 
+#  If you have question regarding this system or the license, please send
 #  an email to info@os4ed.com.
 #
-#  This program is released under the terms of the GNU General Public License as  
-#  published by the Free Software Foundation, version 2 of the License. 
+#  This program is released under the terms of the GNU General Public License as
+#  published by the Free Software Foundation, version 2 of the License.
 #  See license.txt.
 #
 #  This program is distributed in the hope that it will be useful,
@@ -25,8 +25,8 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #***************************************************************************************
-error_reporting(0);
 session_start();
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -138,7 +138,7 @@ session_start();
                                                     var opera2 = inputText.split('-');
                                                     lopera1 = opera1.length;
                                                     lopera2 = opera2.length;
-                                                    // Extract the string into month, date and year  
+                                                    // Extract the string into month, date and year
                                                     if (lopera1 > 1)
                                                     {
                                                         var pdate = inputText.split('/');
@@ -150,7 +150,7 @@ session_start();
                                                     var mm = parseInt(pdate[0]);
                                                     var dd = parseInt(pdate[1]);
                                                     var yy = parseInt(pdate[2]);
-                                                    // Create list of days of a month [assume there is no leap year by default]  
+                                                    // Create list of days of a month [assume there is no leap year by default]
                                                     var ListofDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
                                                     if (mm == 1 || mm > 2)
                                                     {
@@ -248,7 +248,7 @@ session_start();
                                                         }
                                                     }
                                                     if(end_date.value != '')
-                                                    { 
+                                                    {
                                                         if((Date.parse(beg_date.value) >= Date.parse(end_date.value)))
                                                         {
                                                             document.getElementById("error").innerHTML = '<font style="color:red"><b>End date should be greater than Start date. </b></font>';

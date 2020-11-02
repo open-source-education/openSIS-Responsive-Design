@@ -1,20 +1,20 @@
 <?php
 
 #**************************************************************************
-#  openSIS is a free student information system for public and non-public 
+#  openSIS is a free student information system for public and non-public
 #  schools from Open Solutions for Education, Inc. web: www.os4ed.com
 #
-#  openSIS is  web-based, open source, and comes packed with features that 
-#  include student demographic info, scheduling, grade book, attendance, 
-#  report cards, eligibility, transcripts, parent portal, 
-#  student portal and more.   
+#  openSIS is  web-based, open source, and comes packed with features that
+#  include student demographic info, scheduling, grade book, attendance,
+#  report cards, eligibility, transcripts, parent portal,
+#  student portal and more.
 #
 #  Visit the openSIS web site at http://www.opensis.com to learn more.
-#  If you have question regarding this system or the license, please send 
+#  If you have question regarding this system or the license, please send
 #  an email to info@os4ed.com.
 #
-#  This program is released under the terms of the GNU General Public License as  
-#  published by the Free Software Foundation, version 2 of the License. 
+#  This program is released under the terms of the GNU General Public License as
+#  published by the Free Software Foundation, version 2 of the License.
 #  See license.txt.
 #
 #  This program is distributed in the hope that it will be useful,
@@ -26,10 +26,10 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #***************************************************************************************
+session_start();
 include '../functions/ParamLibFnc.php';
 require_once("../functions/PragRepFnc.php");
 error_reporting(0);
-session_start();
 
 $_SESSION['username'] = $_POST["addusername"];
 $_SESSION['password'] = $_POST["addpassword"];
@@ -55,8 +55,8 @@ $err .= '<!DOCTYPE html>
                     <div class="panel-heading">
                         <div class="logo">
                             <img src="assets/images/opensis_logo.png" alt="openSIS">
-                        </div>  
-                        <h3>openSIS Installation</h3>                      
+                        </div>
+                        <h3>openSIS Installation</h3>
                     </div>
                     <div class="panel-body">
                         <div class="installation-steps-wrapper">
@@ -86,7 +86,7 @@ $err .= '<!DOCTYPE html>
                             $err .= '</div>
                         </div><!-- /.installation-steps-wrapper -->
                     </div><!-- /.panel-body -->
-                </div><!-- /.panel -->                
+                </div><!-- /.panel -->
                 <footer>
                     Copyright &copy; Open Solutions for Education, Inc. (<a href="http://www.os4ed.com">OS4ED</a>).
                 </footer>
@@ -146,7 +146,7 @@ if ($dbconn->connect_errno != 0) {
                 </section><!-- /.login -->
             </body>
         </html>';
-        
+
 
         exit($err);
     }
@@ -155,7 +155,6 @@ if ($dbconn->connect_errno != 0) {
 if (clean_param($_REQUEST['mod'], PARAM_ALPHAMOD) == 'upgrade') {
     header('Location: Selectdb.php');
 } else {
-    header('Location: Step2.php');
+		echo "<script type='text/javascript'> document.location = 'Step2.php'; </script>";
 }
 ?>
-                    

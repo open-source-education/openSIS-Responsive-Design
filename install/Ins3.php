@@ -1,19 +1,19 @@
 <?php
 #**************************************************************************
-#  openSIS is a free student information system for public and non-public 
+#  openSIS is a free student information system for public and non-public
 #  schools from Open Solutions for Education, Inc. web: www.os4ed.com
 #
-#  openSIS is  web-based, open source, and comes packed with features that 
-#  include student demographic info, scheduling, grade book, attendance, 
-#  report cards, eligibility, transcripts, parent portal, 
-#  student portal and more.   
+#  openSIS is  web-based, open source, and comes packed with features that
+#  include student demographic info, scheduling, grade book, attendance,
+#  report cards, eligibility, transcripts, parent portal,
+#  student portal and more.
 #
 #  Visit the openSIS web site at http://www.opensis.com to learn more.
-#  If you have question regarding this system or the license, please send 
+#  If you have question regarding this system or the license, please send
 #  an email to info@os4ed.com.
 #
-#  This program is released under the terms of the GNU General Public License as  
-#  published by the Free Software Foundation, version 2 of the License. 
+#  This program is released under the terms of the GNU General Public License as
+#  published by the Free Software Foundation, version 2 of the License.
 #  See license.txt.
 #
 #  This program is distributed in the hope that it will be useful,
@@ -25,10 +25,10 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #***************************************************************************************
+session_start();
 error_reporting(0);
 include '../functions/ParamLibFnc.php';
 require_once("../functions/PragRepFnc.php");
-session_start();
 $dbconn = new mysqli($_SESSION['server'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db'],$_SESSION['port']);
 //$result = mysql_select_db($_SESSION['db']);
         if($dbconn->connect_errno!=0)
@@ -53,12 +53,12 @@ if(clean_param($_REQUEST['sname'],PARAM_NOTAGS) && clean_param($_REQUEST['sample
     '-'.$school_beg_date[1];
     $_SESSION['user_school_end_date']=$school_end_date[2].'-'.$school_end_date[0].
     '-'.$school_end_date[1];
-  
+
     $_SESSION['syear'] = $school_beg_date[2];
   include('SqlForClientSchoolAndSampleDataInc.php');
 	$_SESSION['school_installed']='both';
 
-    
+
 
 }
 else if(clean_param($_REQUEST['sname'],PARAM_NOTAGS)){
@@ -73,7 +73,7 @@ else if(clean_param($_REQUEST['sname'],PARAM_NOTAGS)){
     '-'.$school_end_date[1];
     $_SESSION['syear']=$school_beg_date[2];
     $_SESSION['nextyear'] = $school_beg_date[2]+1;
-   
+
     include('SqlForClientSchoolInc.php');
   $_SESSION['school_installed']='user';
 

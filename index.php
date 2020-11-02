@@ -1,20 +1,20 @@
 <?php
 
 #**************************************************************************
-#  openSIS is a free student information system for public and non-public 
+#  openSIS is a free student information system for public and non-public
 #  schools from Open Solutions for Education, Inc. web: www.os4ed.com
 #
-#  openSIS is  web-based, open source, and comes packed with features that 
-#  include student demographic info, scheduling, grade book, attendance, 
-#  report cards, eligibility, transcripts, parent portal, 
-#  student portal and more.   
+#  openSIS is  web-based, open source, and comes packed with features that
+#  include student demographic info, scheduling, grade book, attendance,
+#  report cards, eligibility, transcripts, parent portal,
+#  student portal and more.
 #
 #  Visit the openSIS web site at http://www.opensis.com to learn more.
-#  If you have question regarding this system or the license, please send 
+#  If you have question regarding this system or the license, please send
 #  an email to info@os4ed.com.
 #
-#  This program is released under the terms of the GNU General Public License as  
-#  published by the Free Software Foundation, version 2 of the License. 
+#  This program is released under the terms of the GNU General Public License as
+#  published by the Free Software Foundation, version 2 of the License.
 #  See license.txt.
 #
 #  This program is distributed in the hope that it will be useful,
@@ -26,6 +26,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #***************************************************************************************
+session_start();
 error_reporting(0);
 include_once("functions/DelDirectoryFnc.php");
 include_once("functions/ParamLibFnc.php");
@@ -75,9 +76,9 @@ if (optional_param('register', '', PARAM_NOTAGS)) {
 
 if (optional_param('USERNAME', '', PARAM_RAW) && optional_param('PASSWORD', '', PARAM_RAW)) {
     db_start();
-    
+
     $username = mysqli_real_escape_string($connection,optional_param('USERNAME', '', PARAM_RAW));
-    if($_REQUEST['remember']) 
+    if($_REQUEST['remember'])
       {
       $cName='remember_me_name';
       $cPwd='remember_me_pwd';
@@ -91,7 +92,7 @@ if (optional_param('USERNAME', '', PARAM_RAW) && optional_param('PASSWORD', '', 
       setcookie('remember_me_name', 'gone', time()-60*60*24*100, "/");
       setcookie('remember_me_pwd', 'gone', time()-60*60*24*100, "/");
       setcookie('remember_me_lang', 'gone', time()-60*60*24*100, "/");
-      } 
+      }
     if ($password == optional_param('PASSWORD', '', PARAM_RAW))
         $password = str_replace("\'", "", md5(mysqli_real_escape_string($connection,optional_param('PASSWORD', '', PARAM_RAW))));
     $password = str_replace("&", "", md5(mysqli_real_escape_string($connection,optional_param('PASSWORD', '', PARAM_RAW))));
@@ -241,7 +242,7 @@ if (optional_param('USERNAME', '', PARAM_RAW) && optional_param('PASSWORD', '', 
                         $usr_prof = $usr_prof[1]['PROFILE'];
                         if ($usr_prof == 'admin' || $usr_prof == 'teacher') {
 
-                            $login_RET = DBGet(DBQuery("SELECT s.PROFILE AS PROFILE,s.STAFF_ID AS STAFF_ID,s.CURRENT_SCHOOL_ID AS CURRENT_SCHOOL_ID,s.FIRST_NAME AS FIRST_NAME,s.LAST_NAME AS LAST_NAME,s.PROFILE_ID AS PROFILE_ID,s.IS_DISABLE AS IS_DISABLE FROM staff s,staff_school_relationship ssr WHERE s.STAFF_ID=ssr.STAFF_ID AND ssr.SYEAR=(SELECT MAX(ssr1.SYEAR) FROM staff_school_relationship ssr1,staff s1 WHERE ssr1.STAFF_ID=s1.STAFF_ID AND s1.STAFF_ID=" . $login_unchk['USER_ID'] . ") AND s.STAFF_ID=" . $login_unchk['USER_ID'])); //pinki             
+                            $login_RET = DBGet(DBQuery("SELECT s.PROFILE AS PROFILE,s.STAFF_ID AS STAFF_ID,s.CURRENT_SCHOOL_ID AS CURRENT_SCHOOL_ID,s.FIRST_NAME AS FIRST_NAME,s.LAST_NAME AS LAST_NAME,s.PROFILE_ID AS PROFILE_ID,s.IS_DISABLE AS IS_DISABLE FROM staff s,staff_school_relationship ssr WHERE s.STAFF_ID=ssr.STAFF_ID AND ssr.SYEAR=(SELECT MAX(ssr1.SYEAR) FROM staff_school_relationship ssr1,staff s1 WHERE ssr1.STAFF_ID=s1.STAFF_ID AND s1.STAFF_ID=" . $login_unchk['USER_ID'] . ") AND s.STAFF_ID=" . $login_unchk['USER_ID'])); //pinki
                             if (count($login_RET) > 0) {
                                 $opensis_staff_access = DBGet(DBQuery('SELECT * FROM staff_school_info WHERE STAFF_ID=' . $login_RET[1]['STAFF_ID']));
                                 if ($opensis_staff_access[1]['OPENSIS_ACCESS'] == 'N') {
@@ -253,7 +254,7 @@ if (optional_param('USERNAME', '', PARAM_RAW) && optional_param('PASSWORD', '', 
                             }
                         }
                         if ($usr_prof == 'parent') {
-                            $login_RET = DBGet(DBQuery("SELECT PROFILE,STAFF_ID AS STAFF_ID,CURRENT_SCHOOL_ID AS CURRENT_SCHOOL_ID,FIRST_NAME,LAST_NAME,PROFILE_ID,IS_DISABLE FROM people WHERE STAFF_ID=" . $login_unchk['USER_ID'])); //pinki             
+                            $login_RET = DBGet(DBQuery("SELECT PROFILE,STAFF_ID AS STAFF_ID,CURRENT_SCHOOL_ID AS CURRENT_SCHOOL_ID,FIRST_NAME,LAST_NAME,PROFILE_ID,IS_DISABLE FROM people WHERE STAFF_ID=" . $login_unchk['USER_ID'])); //pinki
                             if (count($login_RET) > 0) {
                                 $login_RET[1]['USERNAME'] = $login_unchk['USERNAME'];
                                 $login_RET[1]['LAST_LOGIN'] = $login_unchk['LAST_LOGIN'];
@@ -275,7 +276,7 @@ if (optional_param('USERNAME', '', PARAM_RAW) && optional_param('PASSWORD', '', 
                         $error[] = " "._incorrectUsernameOrPassword.". "._pleaseTryAgain.".";
                     }
                 } else {
-                    $admin_RET = DBGet(DBQuery("SELECT STAFF_ID,la.USERNAME,la.FAILED_LOGIN,la.LAST_LOGIN,la.PROFILE_ID FROM staff s,login_authentication la WHERE PROFILE='$username' AND UPPER(la.PASSWORD)=UPPER('$password') AND s.STAFF_ID=la.USER_ID"));  
+                    $admin_RET = DBGet(DBQuery("SELECT STAFF_ID,la.USERNAME,la.FAILED_LOGIN,la.LAST_LOGIN,la.PROFILE_ID FROM staff s,login_authentication la WHERE PROFILE='$username' AND UPPER(la.PASSWORD)=UPPER('$password') AND s.STAFF_ID=la.USER_ID"));
                     // Uid and Password Checking
 
                     if ($admin_RET) {
@@ -304,7 +305,7 @@ if (optional_param('USERNAME', '', PARAM_RAW) && optional_param('PASSWORD', '', 
     }
 
     if ($login_RET && $login_RET[1]['IS_DISABLE'] != 'Y') {
-        
+
         $_SESSION['STAFF_ID'] = $login_RET[1]['STAFF_ID'];
         $_SESSION['LAST_LOGIN'] = $login_RET[1]['LAST_LOGIN'];
 
@@ -391,7 +392,7 @@ if (optional_param('USERNAME', '', PARAM_RAW) && optional_param('PASSWORD', '', 
         if ($activity && $activity != 0 && $days > $activity && ($profile_id != 1 && $profile_id != 0) && $last_login) {
 
             if ($profile_id != 4)
-                DBQuery("UPDATE staff s,staff_school_relationship ssp SET s.IS_DISABLE='Y' WHERE s.STAFF_ID=ssp.STAFF_ID AND s.STAFF_ID='" . $_SESSION['STAFF_ID'] . "' AND ssp.SYEAR='$_SESSION[UserSyear]' AND s.PROFILE_ID NOT IN (0,1)"); //pinki		    
+                DBQuery("UPDATE staff s,staff_school_relationship ssp SET s.IS_DISABLE='Y' WHERE s.STAFF_ID=ssp.STAFF_ID AND s.STAFF_ID='" . $_SESSION['STAFF_ID'] . "' AND ssp.SYEAR='$_SESSION[UserSyear]' AND s.PROFILE_ID NOT IN (0,1)"); //pinki
             else
                 DBQuery("UPDATE people SET IS_DISABLE='Y' WHERE STAFF_ID=" . $_SESSION['STAFF_ID']);
             session_destroy();
@@ -417,8 +418,8 @@ if (optional_param('USERNAME', '', PARAM_RAW) && optional_param('PASSWORD', '', 
             else{
                $check_acess=DBGet(DBQuery('SELECT OPENSIS_ACCESS FROM staff_school_info WHERE STAFF_ID='.$login_RET[1]['STAFF_ID']));
                if($check_acess[1]['OPENSIS_ACCESS']=='N')
-               $error[] = "You do not have portal access. Contact the school administration to enable it.";    
-               else    
+               $error[] = "You do not have portal access. Contact the school administration to enable it.";
+               else
                $error[] = "Your account has been disabled. Contact the school administration to enable your account.";
             }
         }

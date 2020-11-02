@@ -1,20 +1,20 @@
 <?php
 
 #**************************************************************************
-#  openSIS is a free student information system for public and non-public 
+#  openSIS is a free student information system for public and non-public
 #  schools from Open Solutions for Education, Inc. web: www.os4ed.com
 #
-#  openSIS is  web-based, open source, and comes packed with features that 
-#  include student demographic info, scheduling, grade book, attendance, 
-#  report cards, eligibility, transcripts, parent portal, 
+#  openSIS is  web-based, open source, and comes packed with features that
+#  include student demographic info, scheduling, grade book, attendance,
+#  report cards, eligibility, transcripts, parent portal,
 #  student portal and more.
 #
 #  Visit the openSIS web site at http://www.opensis.com to learn more.
-#  If you have question regarding this system or the license, please send 
+#  If you have question regarding this system or the license, please send
 #  an email to info@os4ed.com.
 #
-#  This program is released under the terms of the GNU General Public License as  
-#  published by the Free Software Foundation, version 2 of the License. 
+#  This program is released under the terms of the GNU General Public License as
+#  published by the Free Software Foundation, version 2 of the License.
 #  See license.txt.
 #
 #  This program is distributed in the hope that it will be useful,
@@ -26,7 +26,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #***************************************************************************************
-
+session_start();
 include("functions/ParamLibFnc.php");
 
 echo '<script type="text/javascript" src="assets/js/pages/components_popups.js"></script>';
@@ -34,19 +34,19 @@ echo '<script type="text/javascript" src="assets/js/pages/picker_date.js"></scri
 echo '<script type="text/javascript" src="assets/js/pages/form_checkboxes_radios.js"></script>';
 echo '<script type="text/javascript" src="assets/js/plugins/forms/inputs/jquery.creditCardValidator.js"></script>';
 echo '<script>';
-echo '$(document).ready(function() {        
+echo '$(document).ready(function() {
         // Animate loader off screen
         $("#loading-image").hide();
-        
+
         if($(".clockpicker").length>0){
-            $(".clockpicker").clockpicker({ 
+            $(".clockpicker").clockpicker({
                 twelvehour: true,
                 donetext: \'Done\'
             }).find("input").change(function () {
                //alert(this.value);
             });
         }
-        
+
         if($(".switch-fake-title").length > 0){
             $(".switch-fake-title").each(function(){
                 var check = $(this).closest("label").children("input[type=checkbox]");
@@ -57,7 +57,7 @@ echo '$(document).ready(function() {
                 }
             });
         }
-        
+
         /*if(hasScrollBar(".table-responsive", "horizontal")){
             $(".table-responsive").mousewheel(function (e, delta) {
                 this.scrollLeft -= (delta * 40);
@@ -72,22 +72,22 @@ echo '$(document).ready(function() {
                 $(this).closest("label").children(".switch-fake-title").text("No");
             }
         });
-        
+
         $("body").removeClass("sidebar-mobile-main");
-        
+
         // Scroll page to top after ajax call
         //$("html, body").animate({ scrollTop: 0 }, "200");
-        
+
         $(\'body\').on(\'click\', \'div.sidebar-overlay\', function () {
             $(\'body\').toggleClass(\'sidebar-mobile-main\');
         });
-        
+
         $(\'body\').removeClass(\'sidebar-mobile-main\');
-        
+
         // Initializing Tooltips & Popovers after ajax call
         $(\'[data-toggle="tooltip"], [data-popup="tooltip"]\').tooltip();
         $(\'[data-popup="popover"]\').popover();
-        
+
       });';
 echo '</script>';
 
@@ -120,9 +120,9 @@ if (UserStudentID() && User('PROFILE') != 'parent' && User('PROFILE') != 'studen
         'students/GoalReport.php',
         'students/EnrollmentReport.php',
         // For Scheduling
-        'scheduling/Schedule.php', 
-        'scheduling/ViewSchedule.php', 
-        'scheduling/Requests.php', 
+        'scheduling/Schedule.php',
+        'scheduling/ViewSchedule.php',
+        'scheduling/Requests.php',
         // 'scheduling/MassSchedule.php',
         // 'scheduling/MassRequests.php',
         'scheduling/PrintSchedules.php',
@@ -137,8 +137,8 @@ if (UserStudentID() && User('PROFILE') != 'parent' && User('PROFILE') != 'studen
         'grades/AdminProgressReports.php',
         'grades/ProgressReports.php',
         // 'grades/HonorRoll.php',
-        'grades/EditReportCardGrades.php', 
-        // 'grades/GraduationProgress.php', 
+        'grades/EditReportCardGrades.php',
+        // 'grades/GraduationProgress.php',
         // For Attendance
         'attendance/AddAbsences.php',
         // 'attendance/DailySummary.php',
@@ -152,18 +152,18 @@ if (UserStudentID() && User('PROFILE') != 'parent' && User('PROFILE') != 'studen
 
     $allow_back_to_student_list = array(
         // For Students
-        'students/Student.php', 
+        'students/Student.php',
         // For Scheduling
-        'scheduling/Schedule.php', 
-        'scheduling/ViewSchedule.php', 
-        'scheduling/Requests.php', 
+        'scheduling/Schedule.php',
+        'scheduling/ViewSchedule.php',
+        'scheduling/Requests.php',
         // For Grades
-        'grades/EditReportCardGrades.php', 
+        'grades/EditReportCardGrades.php',
         // For Eligibility
         'eligibility/Student.php'
     );
     // echo "<pre>";print_r($_REQUEST);echo "</pre>";
-    
+
     if ($count_student_RET[1]['NUM'] > 1) {
         $title_set = 'y';
 
@@ -291,7 +291,7 @@ echo "<div id='cal' class='divcal'> </div>";
 if (!isset($_REQUEST['_openSIS_PDF'])) {
     for ($i = 1; $i <= $_openSIS['PrepareDate']; $i++) {
         echo '<script type="text/javascript">
-    
+
 </script>';
     }
     echo '</BODY>';
@@ -361,7 +361,7 @@ function unescape($strIn, $iconv_to = 'UTF-8') {
                 // Escaped ascii character
                 $hexVal = substr($strIn, $iPos, 2);
                 if (hexdec($hexVal) > 127) {
-                    // Convert to Unicode 
+                    // Convert to Unicode
                     $strOut .= code2utf(hexdec($hexVal));
                 } else {
                     $strOut .= chr(hexdec($hexVal));

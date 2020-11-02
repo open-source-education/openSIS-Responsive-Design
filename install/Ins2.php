@@ -1,20 +1,20 @@
 <?php
 
 #**************************************************************************
-#  openSIS is a free student information system for public and non-public 
+#  openSIS is a free student information system for public and non-public
 #  schools from Open Solutions for Education, Inc. web: www.os4ed.com
 #
-#  openSIS is  web-based, open source, and comes packed with features that 
-#  include student demographic info, scheduling, grade book, attendance, 
-#  report cards, eligibility, transcripts, parent portal, 
-#  student portal and more.   
+#  openSIS is  web-based, open source, and comes packed with features that
+#  include student demographic info, scheduling, grade book, attendance,
+#  report cards, eligibility, transcripts, parent portal,
+#  student portal and more.
 #
 #  Visit the openSIS web site at http://www.opensis.com to learn more.
-#  If you have question regarding this system or the license, please send 
+#  If you have question regarding this system or the license, please send
 #  an email to info@os4ed.com.
 #
-#  This program is released under the terms of the GNU General Public License as  
-#  published by the Free Software Foundation, version 2 of the License. 
+#  This program is released under the terms of the GNU General Public License as
+#  published by the Free Software Foundation, version 2 of the License.
 #  See license.txt.
 #
 #  This program is distributed in the hope that it will be useful,
@@ -26,10 +26,10 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #***************************************************************************************
+session_start();
 include '../functions/ParamLibFnc.php';
 require_once("../functions/PragRepFnc.php");
 error_reporting(0);
-session_start();
 $_SESSION['db'] = clean_param($_REQUEST["db"], PARAM_DATA);
 $purgedb = clean_param($_REQUEST["purgedb"], PARAM_ALPHA); // Added variable to check for removing existing data.
 //$dbconn = mysql_connect($_SESSION['host'],$_SESSION['username'],$_SESSION['password']);
@@ -86,7 +86,8 @@ if ($dbconn->connect_errno == 0) {
 
         $dbconn->close();
 
-        header('Location: Step3.php');
+        // header('Location: Step3.php');
+				echo "<script type='text/javascript'> document.location = 'Step3.php'; </script>";
     }
 } else {
     $dbconn = new mysqli($_SESSION['server'], $_SESSION['username'], $_SESSION['password'], '', $_SESSION['port']);
@@ -115,7 +116,8 @@ if ($dbconn->connect_errno == 0) {
     $dbconn->close();
 
 // edited installation
-    header('Location: Step3.php');
+    // header('Location: Step3.php');
+		echo "<script type='text/javascript'> document.location = 'Step3.php'; </script>";
 }
 
 function executeSQL($myFile) {
